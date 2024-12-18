@@ -2,6 +2,7 @@
 import { useState, useEffect } from 'react';
 import { Book, Publisher } from '../types';
 import { getPublishers } from '../api/PublisherAPI';
+import { Box, TextField, Button, MenuItem, Typography, Stack } from '@mui/material';
 
 interface BookFormProps {
   initialValue?: Book;
@@ -30,32 +31,49 @@ function BookForm({ initialValue, onSubmit }: BookFormProps) {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
-      <div>
-        <label>Title: 
-          <input value={title} onChange={e => setTitle(e.target.value)} required/>
-        </label>
-      </div>
-      <div>
-        <label>Author: 
-          <input value={author} onChange={e => setAuthor(e.target.value)} required/>
-        </label>
-      </div>
-      <div>
-        <label>Pages: 
-          <input type="number" value={pages} onChange={e => setPages(Number(e.target.value))} required/>
-        </label>
-      </div>
-      <div>
-        <label>Publisher: 
-          <select value={publisherId} onChange={e => setPublisherId(Number(e.target.value))} required>
-            <option value="">Select a publisher</option>
-            {publishers.map(p => <option key={p.id} value={p.id}>{p.name}</option>)}
-          </select>
-        </label>
-      </div>
-      <button type="submit">Save</button>
-    </form>
+    <Box component="form" onSubmit={handleSubmit} sx={{ maxWidth: 400 }}>
+      <Typography variant="h5" mb={2}>{initialValue ? "Edit Book" : "Add Book"}</Typography>
+      <Stack spacing={2}>
+        <TextField
+          label="Title"
+          value={title}
+          onChange={e => setTitle(e.target.value)}
+          required
+          fullWidth
+        />
+        <TextField
+          label="Author"
+          value={author}
+          onChange={e => setAuthor(e.target.value)}
+          required
+          fullWidth
+        />
+        <TextField
+          label="Pages"
+          type="number"
+          value={pages}
+          onChange={e => setPages(Number(e.target.value))}
+          required
+          fullWidth
+        />
+        <TextField
+          select
+          label="Publisher"
+          value={publisherId ?? ''}
+          onChange={e => setPublisherId(Number(e.target.value))}
+          required
+          fullWidth
+        >
+          <MenuItem value="">Select a publisher</MenuItem>
+          {publishers.map(p => (
+            <MenuItem key={p.id} value={p.id}>{p.name}</MenuItem>
+          ))}
+      </TextField>
+        <Button variant="contained" color="primary" type="submit">
+          Save
+        </Button>
+      </Stack>
+    </Box>
   );
 }
 

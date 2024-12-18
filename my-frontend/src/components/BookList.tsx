@@ -1,5 +1,6 @@
 // src/components/BookList.tsx
 import { Book } from '../types';
+import { Card, CardContent, CardActions, Button, Typography, Stack } from '@mui/material';
 
 interface BookListProps {
   books: Book[];
@@ -8,21 +9,26 @@ interface BookListProps {
 }
 
 function BookList({ books, onEdit, onDelete }: BookListProps) {
+  if (books.length === 0) {
+    return <Typography>No books found.</Typography>;
+  }
+
   return (
-    <div>
-      <h2>Books</h2>
-      {books.length === 0 ? <p>No books found.</p> : (
-        <ul>
-          {books.map(book => (
-            <li key={book.id}>
-              <strong>{book.title}</strong> by {book.author} ({book.pages} pages)
-              <button onClick={() => onEdit(book.id!)}>Edit</button>
-              <button onClick={() => onDelete(book.id!)}>Delete</button>
-            </li>
-          ))}
-        </ul>
-      )}
-    </div>
+    <Stack spacing={2}>
+      {books.map(book => (
+        <Card key={book.id} variant="outlined">
+          <CardContent>
+            <Typography variant="h6">{book.title}</Typography>
+            <Typography variant="subtitle1">by {book.author}</Typography>
+            <Typography variant="body2">{book.pages} pages</Typography>
+          </CardContent>
+          <CardActions>
+            <Button size="small" onClick={() => onEdit(book.id!)}>Edit</Button>
+            <Button size="small" color="error" onClick={() => onDelete(book.id!)}>Delete</Button>
+          </CardActions>
+        </Card>
+      ))}
+    </Stack>
   );
 }
 

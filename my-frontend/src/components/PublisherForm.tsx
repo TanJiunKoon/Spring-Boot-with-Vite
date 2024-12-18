@@ -1,6 +1,7 @@
 // src/components/PublisherForm.tsx
 import { useState } from 'react';
 import { Publisher } from '../types';
+import { Box, TextField, Button, Typography, Stack } from '@mui/material';
 
 interface PublisherFormProps {
   initialValue?: Publisher;
@@ -17,19 +18,28 @@ function PublisherForm({ initialValue, onSubmit }: PublisherFormProps) {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
-      <div>
-        <label>Name:
-          <input value={name} onChange={e => setName(e.target.value)} required/>
-        </label>
-      </div>
-      <div>
-        <label>Location:
-          <input value={location} onChange={e => setLocation(e.target.value)} required/>
-        </label>
-      </div>
-      <button type="submit">Save</button>
-    </form>
+    <Box component="form" onSubmit={handleSubmit} sx={{ maxWidth: 400 }}>
+      <Typography variant="h5" mb={2}>{initialValue ? "Edit Publisher" : "Add Publisher"}</Typography>
+      <Stack spacing={2}>
+        <TextField
+          label="Name"
+          value={name}
+          onChange={e => setName(e.target.value)}
+          required
+          fullWidth
+        />
+        <TextField
+          label="Location"
+          value={location}
+          onChange={e => setLocation(e.target.value)}
+          required
+          fullWidth
+        />
+        <Button variant="contained" color="primary" type="submit">
+          Save
+        </Button>
+      </Stack>
+    </Box>
   );
 }
 

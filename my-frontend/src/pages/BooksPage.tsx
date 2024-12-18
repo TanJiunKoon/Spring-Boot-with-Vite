@@ -4,6 +4,7 @@ import { Book } from '../types';
 import { getBooks, deleteBook } from '../api/BookAPI';
 import { Link, useNavigate } from 'react-router-dom';
 import BookList from '../components/BookList';
+import { Box, Button, Typography, Stack } from '@mui/material';
 
 function BooksPage() {
   const [books, setBooks] = useState<Book[]>([]);
@@ -26,11 +27,13 @@ function BooksPage() {
   }
 
   return (
-    <div>
-      <h1>Books</h1>
-      <Link to="/books/add">Add Book</Link>
-      <BookList books={books} onEdit={handleEdit} onDelete={handleDelete}/>
-    </div>
+    <Box>
+      <Stack direction="row" justifyContent="space-between" alignItems="center" mb={2}>
+        <Typography variant="h4">Books</Typography>
+        <Button variant="contained" component={Link} to="/books/add">Add Book</Button>
+      </Stack>
+      <BookList books={books} onEdit={handleEdit} onDelete={handleDelete} />
+    </Box>
   );
 }
 

@@ -8,23 +8,29 @@ import PublishersPage from './pages/PublishersPage';
 import AddPublisherPage from './pages/AddPublisherPage';
 import EditPublisherPage from './pages/EditPublisherPage';
 
+import { AppBar, Toolbar, Button, Container } from '@mui/material';
+
 function App() {
   return (
     <Router>
-      <nav>
-        <Link to="/">Home</Link>{" | "}
-        <Link to="/books">Books</Link>{" | "}
-        <Link to="/publishers">Publishers</Link>
-      </nav>
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/books" element={<BooksPage />} />
-        <Route path="/books/add" element={<AddBookPage />} />
-        <Route path="/books/edit/:id" element={<EditBookPage />} />
-        <Route path="/publishers" element={<PublishersPage />} />
-        <Route path="/publishers/add" element={<AddPublisherPage />} />
-        <Route path="/publishers/edit/:id" element={<EditPublisherPage />} />
-      </Routes>
+      <AppBar position="static">
+        <Toolbar>
+          <Button color="inherit" component={Link} to="/">Home</Button>
+          <Button color="inherit" component={Link} to="/books">Books</Button>
+          <Button color="inherit" component={Link} to="/publishers">Publishers</Button>
+        </Toolbar>
+      </AppBar>
+      <Container sx={{ mt: 4 }}>
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/books" element={<BooksPage />} />
+          <Route path="/books/add" element={<AddBookPage />} />
+          <Route path="/books/edit/:id" element={<EditBookPage />} />
+          <Route path="/publishers" element={<PublishersPage />} />
+          <Route path="/publishers/add" element={<AddPublisherPage />} />
+          <Route path="/publishers/edit/:id" element={<EditPublisherPage />} />
+        </Routes>
+      </Container>
     </Router>
   );
 }
