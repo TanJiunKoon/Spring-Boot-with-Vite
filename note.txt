@@ -1,0 +1,27 @@
+Add a Publisher:
+POST http://localhost:8080/publishers
+Body:
+{
+  "name": "Manning",
+  "location": "USA"
+}
+Add a Book: POST http://localhost:8080/books?title=High-Performance%20Java%20Persistence&author=Vlad%20Mihalcea&pages=300&publisherId=1
+Search by Author: GET http://localhost:8080/books/author?author=Craig%20Walls
+Search by Title Keyword: GET http://localhost:8080/books/search?keyword=Spring
+Get Books by Publisher: GET http://localhost:8080/books/publisher/1
+Get Paged Results (page=0, size=2): GET http://localhost:8080/books/paged?page=0&size=2
+
+Testing the New Endpoints
+Update a Book (Assume you have book with ID=1):
+PUT http://localhost:8080/books/1?title=New%20Title&pages=500
+This updates the title and pages of the book. If you provide publisherId, it updates the publisher as well.
+Delete a Book (ID=1):
+DELETE http://localhost:8080/books/1
+Update a Publisher (Assume ID=1):
+PUT http://localhost:8080/publishers/1?name=New%20Publisher&location=New%20Location
+Delete a Publisher (ID=1):
+DELETE http://localhost:8080/publishers/1
+
+npm create vite@latest my-frontend --template react
+
+npm install react-router-dom
