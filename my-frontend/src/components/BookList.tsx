@@ -1,6 +1,6 @@
 // src/components/BookList.tsx
 import { Book } from '../types';
-import { Card, CardContent, CardActions, Button, Typography, Stack } from '@mui/material';
+import { Table, TableHead, TableRow, TableCell, TableBody, Button, Typography, Box } from '@mui/material';
 
 interface BookListProps {
   books: Book[];
@@ -14,21 +14,31 @@ function BookList({ books, onEdit, onDelete }: BookListProps) {
   }
 
   return (
-    <Stack spacing={2}>
-      {books.map(book => (
-        <Card key={book.id} variant="outlined">
-          <CardContent>
-            <Typography variant="h6">{book.title}</Typography>
-            <Typography variant="subtitle1">by {book.author}</Typography>
-            <Typography variant="body2">{book.pages} pages</Typography>
-          </CardContent>
-          <CardActions>
-            <Button size="small" onClick={() => onEdit(book.id!)}>Edit</Button>
-            <Button size="small" color="error" onClick={() => onDelete(book.id!)}>Delete</Button>
-          </CardActions>
-        </Card>
-      ))}
-    </Stack>
+    <Box mt={2}>
+      <Table>
+        <TableHead>
+          <TableRow>
+            <TableCell>Title</TableCell>
+            <TableCell>Author</TableCell>
+            <TableCell>Pages</TableCell>
+            <TableCell>Actions</TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {books.map(book => (
+            <TableRow key={book.id}>
+              <TableCell>{book.title}</TableCell>
+              <TableCell>{book.author}</TableCell>
+              <TableCell>{book.pages}</TableCell>
+              <TableCell>
+                <Button size="small" onClick={() => onEdit(book.id!)}>Edit</Button>
+                <Button size="small" color="error" onClick={() => onDelete(book.id!)}>Delete</Button>
+              </TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+    </Box>
   );
 }
 

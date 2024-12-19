@@ -1,0 +1,16 @@
+version: '3.9'
+services:
+  backend:
+    build: .
+    ports:
+      - "8080:8080"
+    environment:
+      - SPRING_PROFILES_ACTIVE=prod
+    # If you rely on an in-memory DB, no extra config needed; otherwise link to a DB service
+
+  frontend:
+    build: ./my-frontend
+    ports:
+      - "5173:80"
+    depends_on:
+      - backend
